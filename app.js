@@ -2,6 +2,9 @@ var matrix=[];
 
 var createTable=function(length){
 //creating table of content 
+//make default value with 3;
+//console.log(length)
+if(!length)length=3;
 var table="<table border='1'><tbody>";
 for(var i=0;i<length;i++){
     var arr=[];
@@ -18,7 +21,8 @@ table+="</tbody></table>";
 document.getElementById("ticTac").innerHTML=table;
 return length;
 }
-
+//initial table invoked with  default value with 3;
+createTable(3);
 var tile="x";
 function placeXO(a){
     var index=a.split(',');
@@ -27,12 +31,19 @@ function placeXO(a){
     matrix[index[0]][index[1]]=tile;
        document.getElementById(a).innerHTML="<img src='./images/"+tile+".png' width='50px' height='50px' />";
             //check tiles if the user win
-            var check=1;
+            var check1=check2=check3=check4=1;
             for(var i=0;i<matrix.length;i++){
-                if(tile!==matrix[index[0]][i]){ check=0; break; } 
+                //check horizantally
+                if(tile!==matrix[index[0]][i]){ check1=0;  } 
+                //check vertically
+                if(tile!==matrix[i][index[1]]){ check2=0;  } 
+                //main diagonal
+                if(tile!==matrix[i][i]){ check3=0;  } 
+                //reverse diagonal or minor diagonal
+                if(tile!==matrix[i][matrix.length-1-i]){ check4=0;  } 
                 //console.log(index[0],i,index[1]);
              }
-             if(check)alert("hello")
+             if(check1 || check2 || check3 || check4)alert("You won with "+matrix.length+" "+tile.toUpperCase()+"'s ")
 
     if(tile==='x'){ tile='o';  }
     else tile='x';
