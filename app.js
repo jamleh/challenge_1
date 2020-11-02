@@ -4,7 +4,7 @@ var createTable=function(length){
 //creating table of content 
 //make default value with 3;
 //console.log(length)
-if(!length)length=3;
+if(!length || typeof(Number(length))!=='number' || length<3)length=3;
 var table="<table border='1'><tbody>";
 for(var i=0;i<length;i++){
     var arr=[];
@@ -23,9 +23,10 @@ return length;
 }
 //initial table invoked with  default value with 3;
 createTable(3);
+
 var tile="x";
 function placeXO(a){
-    var index=a.split(',');
+    var index=a.split(','); //1,1 ==> index[0] , index[1] == > [1,1]
 
    if(!matrix[index[0]][index[1]]){
     matrix[index[0]][index[1]]=tile;
@@ -43,7 +44,14 @@ function placeXO(a){
                 if(tile!==matrix[i][matrix.length-1-i]){ check4=0;  } 
                 //console.log(index[0],i,index[1]);
              }
-             if(check1 || check2 || check3 || check4)alert("You won with "+matrix.length+" "+tile.toUpperCase()+"'s ")
+             if(check1 || check2 || check3 || check4){
+                 alert("You won with "+matrix.length+" "+tile.toUpperCase()+"'s ");
+                 for(var i=0;i<matrix.length;i++){
+                     for(var j=0;j<matrix.length;j++){
+                         if(!matrix[i][j])matrix[i][j]=1
+                     }
+                 }
+                }
 
     if(tile==='x'){ tile='o';  }
     else tile='x';
