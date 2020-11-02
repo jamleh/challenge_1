@@ -16,7 +16,9 @@ for(var i=0;i<length;i++){
 table+="</tbody></table>";
 //console.log(matrix);
 document.getElementById("ticTac").innerHTML=table;
+return length;
 }
+
 var tile="x";
 function placeXO(a){
     var index=a.split(',');
@@ -24,9 +26,17 @@ function placeXO(a){
    if(!matrix[index[0]][index[1]]){
     matrix[index[0]][index[1]]=tile;
        document.getElementById(a).innerHTML="<img src='./images/"+tile+".png' width='50px' height='50px' />";
+            //check tiles if the user win
+            var check=1;
+            for(var i=0;i<matrix.length;i++){
+                if(tile!==matrix[index[0]][i]){ check=0; break; } 
+                //console.log(index[0],i,index[1]);
+             }
+             if(check)alert("hello")
+
     if(tile==='x'){ tile='o';  }
     else tile='x';
-    console.log(matrix)
+    // console.log(matrix,length);
    }
 }
 // //check minor diagonal
